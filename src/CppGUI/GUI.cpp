@@ -291,10 +291,66 @@ GUI::DrawStorm(ATCDisplay::ATCDStorm storm)
 
 	//Podemos pintar muchas esferas, o polígonos
 	glPushMatrix();
-	glColor3f(1.0f,1.0f,1.0f);
-	glTranslatef(storm.pos.x, storm.pos.y, storm.pos.z);
+	glColor3f(0.329412f,0.329412f, 0.329412f);
 
-	glutWireTorus(storm.height, storm.radious-storm.height/2.0, 30, 30);
+	//capa horizontal de la tormenta
+
+	glTranslatef(storm.pos.x, storm.pos.y, storm.pos.z);
+	glutSolidSphere(storm.radious, 30, 30);
+	glTranslatef(-storm.pos.x, -storm.pos.y, -storm.pos.z);
+	glTranslatef(storm.pos.x+storm.radious, storm.pos.y, storm.pos.z);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x-storm.radious, -storm.pos.y, -storm.pos.z);
+	glTranslatef(storm.pos.x+(storm.radious/sqrt(2.0)), storm.pos.y+(storm.radious/sqrt(2.0)), storm.pos.z);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x-(storm.radious/sqrt(2.0)),- storm.pos.y-(storm.radious/sqrt(2.0)), -storm.pos.z);
+	glTranslatef(storm.pos.x, storm.pos.y+ storm.radious ,storm.pos.z);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x, -storm.pos.y- storm.radious,- storm.pos.z);
+	glTranslatef(storm.pos.x-(storm.radious/sqrt(2.0)), storm.pos.y+(storm.radious/sqrt(2.0)), storm.pos.z);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x+(storm.radious/sqrt(2.0)),- storm.pos.y-(storm.radious/sqrt(2.0)), -storm.pos.z);
+	glTranslatef(storm.pos.x-storm.radious, storm.pos.y, storm.pos.z);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x+storm.radious, -storm.pos.y, -storm.pos.z);
+	glTranslatef(storm.pos.x+(storm.radious/sqrt(2.0)), storm.pos.y-(storm.radious/sqrt(2.0)), storm.pos.z);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x-(storm.radious/sqrt(2.0)),- storm.pos.y+(storm.radious/sqrt(2.0)), -storm.pos.z);
+	glTranslatef(storm.pos.x-(storm.radious/sqrt(2.0)), storm.pos.y-(storm.radious/sqrt(2.0)), storm.pos.z);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x+(storm.radious/sqrt(2.0)),- storm.pos.y+(storm.radious/sqrt(2.0)), -storm.pos.z);
+	glTranslatef(storm.pos.x, storm.pos.y- storm.radious, storm.pos.z);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x, -storm.pos.y+ storm.radious,- storm.pos.z);
+
+	//capa vertical de la tormenta
+
+	glTranslatef(storm.pos.x, storm.pos.y, storm.pos.z+storm.radious);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x, -storm.pos.y, -storm.pos.z-storm.radious);
+	glTranslatef(storm.pos.x, storm.pos.y+(storm.radious/sqrt(2.0)), storm.pos.z+(storm.radious/sqrt(2.0)));
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x,- storm.pos.y-(storm.radious/sqrt(2.0)), -storm.pos.z-(storm.radious/sqrt(2.0)));
+	glTranslatef(storm.pos.x, storm.pos.y+ storm.radious ,storm.pos.z);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x, -storm.pos.y- storm.radious,- storm.pos.z);
+	glTranslatef(storm.pos.x, storm.pos.y+(storm.radious/sqrt(2.0)), storm.pos.z-(storm.radious/sqrt(2.0)));
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x,- storm.pos.y-(storm.radious/sqrt(2.0)), -storm.pos.z+(storm.radious/sqrt(2.0)));
+	glTranslatef(storm.pos.x, storm.pos.y, storm.pos.z-storm.radious);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x, -storm.pos.y, -storm.pos.z+storm.radious);
+	glTranslatef(storm.pos.x, storm.pos.y-(storm.radious/sqrt(2.0)), storm.pos.z+(storm.radious/sqrt(2.0)));
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x,- storm.pos.y+(storm.radious/sqrt(2.0)), -storm.pos.z-(storm.radious/sqrt(2.0)));
+	glTranslatef(storm.pos.x, storm.pos.y-(storm.radious/sqrt(2.0)), storm.pos.z-(storm.radious/sqrt(2.0)));
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x,- storm.pos.y+(storm.radious/sqrt(2.0)), -storm.pos.z+(storm.radious/sqrt(2.0)));
+	glTranslatef(storm.pos.x, storm.pos.y- storm.radious, storm.pos.z);
+	glutSolidSphere(storm.radious/2, 30, 30);
+	glTranslatef(-storm.pos.x, -storm.pos.y+ storm.radious,- storm.pos.z);
+
+
 	glPopMatrix();
 }
 
@@ -470,5 +526,3 @@ GUI::win_height, WHITE, GLUT_BITMAP_HELVETICA_12);
 	textDisplay->displayText(help_txt, GUI::win_width-160, GUI::win_height-20, GUI::win_width, GUI::win_height, WHITE, GLUT_BITMAP_HELVETICA_12);
 
 }
-
-
