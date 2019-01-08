@@ -21,16 +21,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with ATCSim.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+#include <string>
 
 #ifndef FLIGHT_H_
 #define FLIGHT_H_
-#include <string>
+
 #include "Position.h"
 #include "Common.h"
 #include <list>
-
-namespace atcsim{
 
 typedef struct {
 	Position pos;
@@ -49,9 +47,10 @@ public:
 	std::list<Route> *getRoute() { return &route;};
 	bool routed() { return !route.empty();};
 	Position getPosition() { return pos;};
+	Position getPositionInit() { return pos_init;};
 	float getInclination() { return inclination;};
 	float getBearing() { return bearing;};
-	float getInitBearing() { return init_bearing;};
+	float getBearingInit() { return bearing_init;};
 	float getSpeed() { return speed;};
 	void setSpeed(float tgt_speed) {speed = checkSpeedLimits(tgt_speed);}
 	float getPoints() {return points;};
@@ -64,8 +63,8 @@ public:
 
 private:
 	std::string id;
-	Position pos, last_pos;
-	float init_bearing, bearing, inclination;
+	Position pos, last_pos, pos_init;
+	float bearing, bearing_init, inclination;
 	float speed, w_speed;
 	std::list<Route> route;
 	bool focused;
@@ -76,7 +75,5 @@ private:
 
 	float checkSpeedLimits(float tgt_speed);
 };
-
-};  // namespace atcsim
 
 #endif /* FLIGHT_H_ */

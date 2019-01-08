@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 2.8)
 project (ATCSim)
 
 set(CMAKE_BUILD_TYPE Debug)
@@ -17,9 +17,9 @@ endif()
 find_package(OpenGL REQUIRED)
 
 set(Ice_LIBRARY "/usr/lib/x86_64-linux-gnu/libIce.so")
-set(IceUtil_LIBRARY "/usr/lib/x86_64-linux-gnu/libIceutil.so")
+set(IceUtil_LIBRARY "/usr/lib/x86_64-linux-gnu/libIceUtil.so")
 
-find_package(Ice REQUIRED)
+#find_package(Ice REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 find_package(GLUT REQUIRED)
@@ -64,8 +64,8 @@ set(CPPGUI_SRCS
 
 add_library(ATCSimLib SHARED ${ATCSIM_SRCS})
 target_link_libraries(ATCSimLib
-  ${Ice_LIBRARIES}
-  ${IceUtil_LIBRARIES}
+  ${Ice_LIBRARY}
+  ${IceUtil_LIBRARY}
 )
 
 # add the executable
@@ -76,15 +76,15 @@ add_executable(ATCSim
 add_executable(cppgui ${CPPGUI_SRCS})
 
 target_link_libraries(ATCSim
-  ${Ice_LIBRARIES}
-  ${IceUtil_LIBRARIES}
+  ${Ice_LIBRARY}
+  ${IceUtil_LIBRARY}
    ${CMAKE_THREAD_LIBS_INIT}
    ATCSimLib
 )
 
 target_link_libraries(cppgui
-  ${Ice_LIBRARIES}
-  ${IceUtil_LIBRARIES}
+  ${Ice_LIBRARY}
+  ${IceUtil_LIBRARY}
 	${CMAKE_THREAD_LIBS_INIT}
 	${OPENGL_LIBRARIES}
 	${GLUT_LIBRARY}
@@ -97,19 +97,19 @@ add_style_check_target(cppgui_cpplint "${CPPGUI_SRCS}")
 
 ## Testing #################################################
 
-include(cmake/gtest.cmake)
-enable_testing()
-include_directories(${GTEST_INCLUDE_DIRS})
-file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
-foreach(_test_file ${TEST_SRC_FILES})
-    get_filename_component(_test_name ${_test_file} NAME_WE)
-    add_executable(${_test_name} ${_test_file})
-    add_dependencies(${_test_name} googletest)
-    target_link_libraries(${_test_name} gtest gtest_main
-      ${CMAKE_THREAD_LIBS_INIT}
-      ${Ice_LIBRARIES}
-      ${IceUtil_LIBRARIES}
-      ATCSimLib)
-    add_test(${_test_name} ${_test_name})
-    set_tests_properties(${_test_name} PROPERTIES TIMEOUT 5)
-endforeach()
+#include(cmake/gtest.cmake)
+#enable_testing()
+#include_directories(${GTEST_INCLUDE_DIRS})
+#file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
+#foreach(_test_file ${TEST_SRC_FILES})
+#    get_filename_component(_test_name ${_test_file} NAME_WE)
+#    add_executable(${_test_name} ${_test_file})
+#    add_dependencies(${_test_name} googletest)
+#    target_link_libraries(${_test_name} gtest gtest_main
+#      ${CMAKE_THREAD_LIBS_INIT}
+#      ${Ice_LIBRARY}
+#      ${IceUtil_LIBRARY}
+#      ATCSimLib)
+#    add_test(${_test_name} ${_test_name})
+#    set_tests_properties(${_test_name} PROPERTIES TIMEOUT 5)
+#endforeach()
