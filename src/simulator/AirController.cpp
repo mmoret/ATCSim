@@ -28,6 +28,8 @@
 #include "Position.h"
 #include <list>
 
+namespace atcsim{
+
 AirController::AirController() {
 	// TODO Auto-generated constructor stub
 
@@ -608,3 +610,4 @@ for(it = flights.begin(); it!=flights.end(); ++it)
 	}
 }*/
 }
+} //namespace atcsim
